@@ -21,8 +21,8 @@
         }
 
         .Footer {
-            display: flex;
-            justify-content: space-around;
+            display: none;
+            gap: 20px;
         }
 
         .Footer-div {
@@ -64,12 +64,21 @@
             width: 90px;
             border-radius: 1rem;
         }
+
+        .u-visible {
+            display: flex;
+            justify-content: space-around;
+            
+        }
     </style>
 </head>
 
 <body>
     <h1 class="H1">Lista de Tareas</h1>
     <main class="Main">
+
+
+
         <div>
             <ul id="listaTareas">
                 <li>Ingrese tareas en su lista...</li>
@@ -94,12 +103,13 @@
     </form>
 
 
-
+<div class="Menu">Menú</div>
     <footer class="Footer">
         <div class="Footer-div">Pendientes</div>
         <div class="Footer-div">Todas</div>
         <div class="Footer-div Perfil">Perfil</div>
     </footer>
+
 
 
     <script>
@@ -126,8 +136,11 @@
 
         const lightbox = document.querySelector(".Lightbox");
         const openPerfil = document.querySelector(".Perfil")
-
         const volverBtn = document.querySelector(".Lightbox-volver");
+
+        const menu = document.querySelector(".Menu");
+        const openFooter = document.querySelector(".Footer");
+
 
         //const listaDeTareas = ["Ordenar el código JS", "Crear las Funciones", "Probar el programa"];
 
@@ -254,6 +267,14 @@
         openPerfil.addEventListener('pointerdown', lightboxHandler);
 
         volverBtn.addEventListener('pointerdown', volverBtnHandler);
+
+        // MENU, TAB
+
+        menu.addEventListener("pointerdown", () => {
+
+        openFooter.classList.add("u-visible")
+
+        })
 
         // -----------------------------------------------
         // 5. Inicializar nuestro programa
