@@ -68,7 +68,14 @@
         .u-visible {
             display: flex;
             justify-content: space-around;
-            
+
+        }
+        .Menu{
+            display: flex;
+            justify-content: center;
+            background-color: aqua;
+            border-radius: 10px;
+            width: 70px;
         }
     </style>
 </head>
@@ -103,7 +110,7 @@
     </form>
 
 
-<div class="Menu">Menú</div>
+    <div class="Menu">Menú</div>
     <footer class="Footer">
         <div class="Footer-div">Pendientes</div>
         <div class="Footer-div">Todas</div>
@@ -271,10 +278,18 @@
         // MENU, TAB
 
         menu.addEventListener("pointerdown", () => {
+            openFooter.classList.toggle("u-visible");
+        });
+        
+        // menu.addEventListener("pointerdown", () => {
+        //     if(openFooter.classList.contains("u-visible")){
+        //     openFooter.classList.remove("u-visible");
 
-        openFooter.classList.add("u-visible")
+        //     } else{
+        //         openFooter.classList.add("u-visible");
+        //     }
 
-        })
+        // })
 
         // -----------------------------------------------
         // 5. Inicializar nuestro programa
