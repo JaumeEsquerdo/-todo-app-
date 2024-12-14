@@ -36,6 +36,34 @@
             justify-content: center;
             align-items: center;
         }
+
+        .Lightbox {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 15px auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(10rem);
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
+
+        .Lightbox.isActive {
+            opacity: 1;
+            display: flex;
+        }
+
+        .Lightbox-volver {
+            background-color: lightcoral;
+            width: 90px;
+            border-radius: 1rem;
+        }
     </style>
 </head>
 
@@ -57,10 +85,20 @@
     </main>
 
 
+    <form action="" method="get" class="Lightbox">
+        <legend>Regístrate</legend>
+        <label><input type="text" placeholder="Nombre"></label>
+        <label><input type="email" placeholder="Correo Electrónico"></label>
+        <input type="submit">
+        <button class="Lightbox-volver">Volver</button>
+    </form>
+
+
+
     <footer class="Footer">
         <div class="Footer-div">Pendientes</div>
         <div class="Footer-div">Todas</div>
-        <div class="Footer-div">Perfil</div>
+        <div class="Footer-div Perfil">Perfil</div>
     </footer>
 
 
@@ -73,6 +111,11 @@
             Link al manual: 
             Autor: El profe Tomi.
         */
+        /*
+        Voy a hacer un lightbox en el boton de perfil para registrarse.
+        y hacer el js de los botones de pendientes y todas.
+
+        */
 
         // -----------------------------------------------
         // 1. Constantes y Variables
@@ -80,6 +123,11 @@
         const formu = document.getElementById("formTarea");
         const txtTarea = document.getElementById("txtTarea");
         const boxTareas = document.getElementById("listaTareas");
+
+        const lightbox = document.querySelector(".Lightbox");
+        const openPerfil = document.querySelector(".Perfil")
+
+        const volverBtn = document.querySelector(".Lightbox-volver");
 
         //const listaDeTareas = ["Ordenar el código JS", "Crear las Funciones", "Probar el programa"];
 
@@ -197,12 +245,22 @@
         });
 
 
+        // LIGHTBOX 
+
+        const volverBtnHandler = () => lightbox.classList.remove("isActive");
+
+        const lightboxHandler = () => lightbox.classList.add('isActive');
+
+        openPerfil.addEventListener('pointerdown', lightboxHandler);
+
+        volverBtn.addEventListener('pointerdown', volverBtnHandler);
 
         // -----------------------------------------------
         // 5. Inicializar nuestro programa
         // -----------------------------------------------
 
         mostrarTareas();
+
 
     </script>
 </body>
