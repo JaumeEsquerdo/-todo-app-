@@ -7,9 +7,18 @@
     <title>ToDo List</title>
 
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .Body{
+            background-color: rgb(196, 219, 207);
+        }
         .H1 {
-            display: block;
-            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
         }
 
         .Main {
@@ -26,6 +35,7 @@
         }
 
         .Footer-div {
+            margin-top: 30px;
             background-color: aliceblue;
             width: 100px;
             height: 50px;
@@ -35,6 +45,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+
         }
 
         .Lightbox {
@@ -70,33 +82,137 @@
             justify-content: space-around;
 
         }
-        .Menu{
+
+        .Menu {
             display: flex;
             justify-content: center;
-            background-color: aqua;
+            align-items: center;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+            background-color: rgb(199, 235, 235);
             border-radius: 10px;
-            width: 70px;
+            width: 100%;
+            height: 40px;
         }
+
+        .Listas {
+            list-style: none;
+        }
+        /* estilado form */
+
+        /* Contenedor de cada tarea */
+.TaskList-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* Checkbox */
+.TaskList-item__checkbox {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Etiqueta de tarea */
+.TaskList-item__label {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Botones */
+.TaskList-item__button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.TaskList-item__button--delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.TaskList-item__button--delete:hover {
+    background-color: #d32f2f;
+}
+
+.TaskList-item__button--complete {
+    background-color: #4caf50;
+    color: white;
+}
+
+.TaskList-item__button--complete:hover {
+    background-color: #388e3c;
+}
+
+/* Bloque principal */
+.FormTarea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+/* Elemento: input */
+.FormTarea__input {
+    flex: 1; /* Para que ocupe el máximo espacio disponible */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.FormTarea__input:focus {
+    border-color: #0078d4; /* Color azul al hacer focus */
+}
+
+/* Elemento: botón */
+.FormTarea__button {
+    padding: 8px 16px;
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.FormTarea__button:hover {
+    background-color: #005ea2; /* Más oscuro al pasar el ratón */
+}
+
     </style>
 </head>
 
-<body>
+<body class="Body">
     <h1 class="H1">Lista de Tareas</h1>
     <main class="Main">
 
 
 
         <div>
-            <ul id="listaTareas">
+            <ul id="listaTareas" class="Listas">
                 <li>Ingrese tareas en su lista...</li>
                 <!-- <li>Tarea 1</li>
             <li>Tarea 2</li> -->
             </ul>
         </div>
 
-        <form id="formTarea">
-            <input id="txtTarea" type="text" name="tuTarea" placeholder="Ingrese una tarea">
-            <button type="submit">Agregar Tarea</button>
+        <form id="FormTarea">
+            <input  class="FormTarea__input" id="txtTarea" type="text" name="tuTarea" placeholder="Ingrese una tarea">
+            <button class="FormTarea__button" type="submit">Agregar Tarea</button>
         </form>
     </main>
 
@@ -112,8 +228,8 @@
 
     <div class="Menu">Menú</div>
     <footer class="Footer">
-        <div class="Footer-div">Pendientes</div>
-        <div class="Footer-div">Todas</div>
+        <div class="Footer-div Pendientes">Pendientes</div>
+        <div class="Footer-div Todas">Todas</div>
         <div class="Footer-div Perfil">Perfil</div>
     </footer>
 
@@ -137,7 +253,7 @@
         // -----------------------------------------------
         // 1. Constantes y Variables
         // -----------------------------------------------
-        const formu = document.getElementById("formTarea");
+        const formu = document.getElementById("FormTarea");
         const txtTarea = document.getElementById("txtTarea");
         const boxTareas = document.getElementById("listaTareas");
 
@@ -147,6 +263,10 @@
 
         const menu = document.querySelector(".Menu");
         const openFooter = document.querySelector(".Footer");
+
+        const btnPendientes = document.querySelector(".Pendientes");
+
+        const btnTodas = document.querySelector(".Todas");
 
 
         //const listaDeTareas = ["Ordenar el código JS", "Crear las Funciones", "Probar el programa"];
@@ -192,11 +312,11 @@
 
                 // boxTareas.innerHTML += `<li>${id} ${titulo}</li>`;
                 boxTareas.innerHTML += `
-                <li>
-                    <input type="checkbox" id="${id}" name="chk_completada" ${isChecked} />
-                    <label for="${id}">${titulo}</label>
-                    <button onclick="eliminarTarea(${id})">X</button>
-                    <button onclick="completarTarea(${id})">Completar</button>
+                <li class="TaskList-item">
+                    <input class="TaskList-item__checkbox" type="checkbox" id="${id}" name="chk_completada" ${isChecked} />
+                    <label class="TaskList-item__label" for="${id}">${titulo}</label>
+                    <button class="TaskList-item__button TaskList-item__button--delete" onclick="eliminarTarea(${id})">X</button>
+                    <button class="TaskList-item__button TaskList-item__button--complete" onclick="completarTarea(${id})">Completar</button>
                 </li>
                 `;
             });
@@ -214,11 +334,11 @@
 
             const nuevoId = parseInt(Math.random() * 100);
 
-            const objetoTarea = { id: nuevoId, titulo: nuevaTarea, isCompletada: true };
+            const objetoTarea = { id: nuevoId, titulo: nuevaTarea, isCompletada: false };
 
             // Tarea válida 
 
-            listaDeTareas.push(nuevaTarea); // push() es para agregar nuevo item a la lista
+            listaDeTareas.push(objetoTarea); // push() es para agregar nuevo item a la lista
             mostrarTareas();
             txtTarea.value = ""; // limpiar mi input
         }
@@ -279,8 +399,37 @@
 
         menu.addEventListener("pointerdown", () => {
             openFooter.classList.toggle("u-visible");
+
+            // BTN PENDIENTES
+
+            btnPendientes.addEventListener("pointerdown", () => {
+
+                const tareasPendientes = listaDeTareas.filter(tarea => !tarea.isCompletada);
+
+                boxTareas.innerHTML = "";
+
+                tareasPendientes.forEach((tarea) => {
+                    const titulo = tarea.titulo;
+                    const id = tarea.id;
+
+                    boxTareas.innerHTML += `    <li>
+                <input type="checkbox" id="${id}" name="chk_completada" />
+                <label for="${id}">${titulo} (${id})</label>
+                <button onclick="eliminarTarea(${id})">X</button>
+                <button onclick="completarTarea(${id})">Completar</button>
+            </li>`
+                })
+            })
         });
-        
+
+        // BTN TODAS
+
+        btnTodas.addEventListener("pointerdown", mostrarTareas);
+
+
+
+
+
         // menu.addEventListener("pointerdown", () => {
         //     if(openFooter.classList.contains("u-visible")){
         //     openFooter.classList.remove("u-visible");
