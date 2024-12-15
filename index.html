@@ -7,14 +7,16 @@
     <title>ToDo List</title>
 
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        .Body{
+
+        .Body {
             background-color: rgb(196, 219, 207);
         }
+
         .H1 {
             display: flex;
             justify-content: center;
@@ -72,16 +74,67 @@
         }
 
         .Lightbox-volver {
-            background-color: lightcoral;
-            width: 90px;
-            border-radius: 1rem;
+            display: block;
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #0078d4;
+            background-color: transparent;
+            border: 1px solid #0078d4;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .Lightbox-volver:hover {
+            background-color: #e6f2fb;
         }
 
         .u-visible {
             display: flex;
             justify-content: space-around;
-
         }
+
+        .Lightbox-legend {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #333;
+        }
+
+        .Lightbox-label {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .Lightbox-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+
+
+        .Lightbox-input {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #0078d4;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .Lightbox-input:hover {
+            background-color: #005a9e;
+        }
+
+
+
 
         .Menu {
             display: flex;
@@ -97,102 +150,107 @@
         .Listas {
             list-style: none;
         }
+
         /* estilado form */
 
         /* Contenedor de cada tarea */
-.TaskList-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-}
+        .TaskList-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
 
-/* Checkbox */
-.TaskList-item__checkbox {
-    margin-right: 10px;
-    cursor: pointer;
-}
+        /* Checkbox */
+        .TaskList-item__checkbox {
+            margin-right: 10px;
+            cursor: pointer;
+        }
 
-/* Etiqueta de tarea */
-.TaskList-item__label {
-    flex-grow: 1;
-    font-size: 16px;
-    color: #333;
-}
+        /* Etiqueta de tarea */
+        .TaskList-item__label {
+            flex-grow: 1;
+            font-size: 16px;
+            color: #333;
+        }
 
-/* Botones */
-.TaskList-item__button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        /* Botones */
+        .TaskList-item__button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.TaskList-item__button--delete {
-    background-color: #f44336;
-    color: white;
-}
+        .TaskList-item__button--delete {
+            background-color: #f44336;
+            color: white;
+        }
 
-.TaskList-item__button--delete:hover {
-    background-color: #d32f2f;
-}
+        .TaskList-item__button--delete:hover {
+            background-color: #d32f2f;
+        }
 
-.TaskList-item__button--complete {
-    background-color: #4caf50;
-    color: white;
-}
+        .TaskList-item__button--complete {
+            background-color: #4caf50;
+            color: white;
+        }
 
-.TaskList-item__button--complete:hover {
-    background-color: #388e3c;
-}
+        .TaskList-item__button--complete:hover {
+            background-color: #388e3c;
+        }
 
-/* Bloque principal */
-.FormTarea {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-}
+        /* Bloque principal */
+        .FormTarea {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
 
-/* Elemento: input */
-.FormTarea__input {
-    flex: 1; /* Para que ocupe el máximo espacio disponible */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
+        /* Elemento: input */
+        .FormTarea__input {
+            flex: 1;
+            /* Para que ocupe el máximo espacio disponible */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
 
-.FormTarea__input:focus {
-    border-color: #0078d4; /* Color azul al hacer focus */
-}
+        .FormTarea__input:focus {
+            border-color: #0078d4;
+            /* Color azul al hacer focus */
+        }
 
-/* Elemento: botón */
-.FormTarea__button {
-    padding: 8px 16px;
-    background-color: #0078d4;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        /* Elemento: botón */
+        .FormTarea__button {
+            padding: 8px 16px;
+            background-color: #0078d4;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.FormTarea__button:hover {
-    background-color: #005ea2; /* Más oscuro al pasar el ratón */
-}
+        .FormTarea__button:hover {
+            background-color: #005ea2;
+            /* Más oscuro al pasar el ratón */
+        }
 
+        /* css lightbox */
     </style>
 </head>
 
@@ -211,17 +269,17 @@
         </div>
 
         <form id="FormTarea">
-            <input  class="FormTarea__input" id="txtTarea" type="text" name="tuTarea" placeholder="Ingrese una tarea">
+            <input class="FormTarea__input" id="txtTarea" type="text" name="tuTarea" placeholder="Ingrese una tarea">
             <button class="FormTarea__button" type="submit">Agregar Tarea</button>
         </form>
     </main>
 
 
     <form action="" method="get" class="Lightbox">
-        <legend>Regístrate</legend>
-        <label><input type="text" placeholder="Nombre"></label>
-        <label><input type="email" placeholder="Correo Electrónico"></label>
-        <input type="submit">
+        <legend class="Lightbox-legend">Regístrate</legend>
+        <label class="Lightbox-label"><input type="text" placeholder="Nombre"></label>
+        <label class="Lightbox-label"><input type="email" placeholder="Correo Electrónico"></label>
+        <input class="Lightbox-input" type="submit" value="Enviar">
         <button class="Lightbox-volver">Volver</button>
     </form>
 
